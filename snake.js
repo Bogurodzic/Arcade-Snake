@@ -1,7 +1,13 @@
+var start = true;
+
 var snake;
-var multiplier = 20;
 var food;
 var score;
+var multiplier = 20;
+
+//Colors:
+var bgColor = 25;
+var snakeColor = 255;
 
 
 
@@ -21,25 +27,31 @@ function location() {
 	
 }
 
+
+
 function draw() {
-	background(25);
-	snake.update();
-	snake.show();
-	snake.death();
-	console.log(snake.x);
-	console.log(snake.y);
+	background(bgColor);
 
-	if (snake.eat(food) === true){
-		score.points += 1;
-		location();
+	if(start === true){
+		snake.update();
+		snake.show();
+		snake.death();
+		console.log(snake.x);
+		console.log(snake.y);
+
+		if (snake.eat(food) === true){
+			score.points += 1;
+			location();
+		}
+		score.displayString();
+		score.displayScore();
+		score.checkPoints();
+
+		fill(121, 185, 71);
+		rect(food.x, food.y, multiplier, multiplier);
+	} else {
+		//startGame();
 	}
-	score.displayString();
-
-	score.displayScore();
-
-	fill(144, 0, 150);
-	rect(food.x, food.y, multiplier, multiplier);
-
 }
 
 function keyPressed() {
@@ -86,15 +98,24 @@ function keyPressed() {
 
 function Score(){
 	this.points = 0;
+	this.highestPoints = 0;
 
 	this.displayString = function(){
 		textSize(10);
 		text("Score: ", 550, 0, 15, 15);
+		text("Best-Score: ", 0, 0, 15, 15);
 	}
 
 	this.displayScore = function(){
 		textSize(10);
 		text(this.points , 585, 0, 15, 15);
+		text(this.highestPoints, 55, 0, 15, 15);
+	}
+
+	this.checkPoints = function(){
+		if (this.points > this.highestPoints){
+			this.highestPoints = this.points;
+		}
 	}
 }
 
@@ -125,7 +146,7 @@ function Snake() {
 	}
 
 	this.show = function(){
-		fill(255);
+		fill(snakeColor);
 		for (var i=0; i < this.tail.length; i++){
 			rect(this.tail[i].x, this.tail[i].y, multiplier, multiplier);
 		}
