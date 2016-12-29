@@ -53,8 +53,18 @@ function Snake() {
 	this.xspeed = 1;
 	this.yspeed = 0;
 
+	this.size = 0;
+	this.tail = [];
 
 	this.update = function(){
+		if (this.tail.length === this.size){
+			for (var i=0; i<this.tail.length-1; i++){
+				this.tail[i] = this.tail[i+1];				
+			}			
+		}
+
+		this.tail[this.size-1] = createVector(this.x, this.y);
+
 		this.x = this.x + this.xspeed * multiplier;
 		this.y = this.y + this.yspeed * multiplier;
 
@@ -65,7 +75,11 @@ function Snake() {
 
 	this.show = function(){
 		fill(255);
+		for (var i=0; i < this.tail.length; i++){
+			rect(this.tail[i].x, this.tail[i].y, multiplier, multiplier);
+		}
 		rect(this.x, this.y, multiplier, multiplier);
+
 	}
 
 	this.direction = function(x, y) {
@@ -77,6 +91,7 @@ function Snake() {
 		var distance = dist(this.x, this.y, cords.x, cords.y);
 
 		if (distance<1) {
+			this.size += 1;
 			return true;
 		} else {
 			return false;
