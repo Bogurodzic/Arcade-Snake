@@ -16,6 +16,7 @@ function setup() {
 	frameRate(20);
 	snake = new Snake();
 	score = new Score();
+	menu = new Menu();
 	location();
 }
 
@@ -28,7 +29,6 @@ function location() {
 }
 
 
-
 function draw() {
 	background(bgColor);
 
@@ -36,8 +36,6 @@ function draw() {
 		snake.update();
 		snake.show();
 		snake.death();
-		console.log(snake.x);
-		console.log(snake.y);
 
 		if (snake.eat(food) === true){
 			score.points += 1;
@@ -46,6 +44,7 @@ function draw() {
 		score.displayString();
 		score.displayScore();
 		score.checkPoints();
+		menu.showMenuTitle();
 
 		fill(121, 185, 71);
 		rect(food.x, food.y, multiplier, multiplier);
@@ -194,3 +193,51 @@ class Snake {
 		}
 	}
 }
+
+class Menu {
+	constructor(){
+		this.menuVisible = false;
+		this.menuObjects = [
+			[
+				"Menu", 300, 220, 15, 15
+			],
+			[
+				"Play", 300, 250, 15, 15
+			],
+			[
+				"Options", 300, 270, 15, 15
+			]
+		]
+	} 
+
+	handleShowMenu() {
+		pauseGame();
+		this.showMenu();
+	}
+
+	hideMenu() {
+		menuVisible = false;
+	}
+	
+	showMenu() {
+		menuVisible = true;
+	}
+
+	showMenuTitle() {
+		textAlign(CENTER);
+		textSize(16);
+		text(...this.menuObjects[0]);
+		text(...this.menuObjects[1]);
+		text(...this.menuObjects[2]);
+	}
+}
+
+
+function pauseGame(){
+	start = false;
+}
+
+function startGame(){
+	start = true;
+}
+
