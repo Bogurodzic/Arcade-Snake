@@ -14,7 +14,6 @@
 Classic arcade game project
 
 ## Screenshots
-![Example screenshot](http://www.kamiljarzab.pl/Projekty/Snake/img/screen.png)
 
 ## Technologies
 * p5.js [[link]](https://p5js.org/)
