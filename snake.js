@@ -9,7 +9,13 @@ var multiplier = 20;
 var bgColor = 25;
 var snakeColor = 255;
 
+function preload() {
+	// Ensure the .ttf or .otf font stored in the assets directory
+	// is loaded before setup() and draw() are called
+	arcadeFont = loadFont('assets/fonts/black.ttf');
+	scoreFont = loadFont('assets/fonts/score.ttf');
 
+  }
 
 function setup() {
 	createCanvas(600, 600);
@@ -108,13 +114,14 @@ class Score {
 	}
 
 	handleScoreDisplaying(){
+		textFont(scoreFont);
 		this.displayString();
 		this.displayScore();
 		this.checkPoints();
 	}
 
 	displayString(){
-		textSize(10);
+		textSize(18);
 		textAlign(LEFT);
 		text("Score: ", 0, 0, 15, 15);
 		textAlign(RIGHT);
@@ -122,7 +129,7 @@ class Score {
 	}
 
 	displayScore(){
-		textSize(10);
+		textSize(18);
 		text(this.points , 585, 0, 15, 15);
 		text(this.highestPoints, 55, 0, 15, 15);
 	}
@@ -266,6 +273,7 @@ class Menu {
 	}
 
 	showText(textDetails, color, size, align) {
+		textFont(arcadeFont);
 		fill(color.fristValue, color.secondValue, color.thirdValue);
 		textSize(size);
 		textAlign(align);
