@@ -42,9 +42,7 @@ function draw() {
 			score.points += 1;
 			location();
 		}
-		score.displayString();
-		score.displayScore();
-		score.checkPoints();
+		score.handleScoreDisplaying();
 
 		fill(121, 185, 71);
 		rect(food.x, food.y, multiplier, multiplier);
@@ -107,10 +105,18 @@ class Score {
 		this.highestPoints = 0;
 	}
 
+	handleScoreDisplaying(){
+		this.displayString();
+		this.displayScore();
+		this.checkPoints();
+	}
+
 	displayString(){
 		textSize(10);
-		text("Score: ", 550, 0, 15, 15);
-		text("Best-Score: ", 0, 0, 15, 15);
+		textAlign(LEFT);
+		text("Score: ", 0, 0, 15, 15);
+		textAlign(RIGHT);
+		text("Best-Score: ", 550, 0, 15, 15);
 	}
 
 	displayScore(){
