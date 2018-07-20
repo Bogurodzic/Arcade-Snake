@@ -10,12 +10,11 @@ var bgColor = 25;
 var snakeColor = 255;
 
 function preload() {
-	// Ensure the .ttf or .otf font stored in the assets directory
-	// is loaded before setup() and draw() are called
 	arcadeFont = loadFont('assets/fonts/black.ttf');
 	scoreFont = loadFont('assets/fonts/score.ttf');
-
-  }
+	
+	coin = loadSound('assets/music/coin.wav');
+}
 
 function setup() {
 	createCanvas(600, 600);
@@ -46,6 +45,7 @@ function draw() {
 
 		if (snake.eat(food) === true){
 			score.points += 1;
+			coin.play();
 			location();
 		}
 
@@ -144,7 +144,7 @@ class Score {
 class Snake {
 	constructor(){
 		this.x = 0;
-		this.y = 0;
+		this.y = 300;
 		this.xspeed = 1;
 		this.yspeed = 0;
 	
@@ -197,7 +197,7 @@ class Snake {
 		this.size = 0;
 		this.tail = [];
 		this.x=0;
-		this.y=0;
+		this.y=300;
 		score.points = 0;
 		location();	
 		redraw();

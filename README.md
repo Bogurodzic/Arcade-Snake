@@ -20,6 +20,9 @@ Classic arcade game project
 * p5.js [[link]](https://p5js.org/)
 * javascript
 
+## Assets
+* sound - Picked Coin [[link]](https://opengameart.org/content/picked-coin-echo-2)
+
 ## Setup
 * Open live version: [[link]](http://www.kamiljarzab.pl/Projekty/Snake/)
 * Or clone the repo and open index.html in your browser.
