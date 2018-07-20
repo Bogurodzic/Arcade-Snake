@@ -97,6 +97,10 @@ function keyPressed() {
 
 }
 
+function mousePressed() {
+	menu.clickEvents();
+}
+
 class Score {
 	constructor(){
 		this.points = 0;
@@ -271,6 +275,18 @@ class Menu {
 		} else {
 			menuObject.color = this.colors.normal;
 		}
+	}
+
+	clickEvents(){
+		for(var i = 1; i < this.menuObjects.length; i++){
+			this.checkIfClicked(this.menuObjects[i]);
+		}
+	}
+
+	checkIfClicked(menuObject) {
+		if(mouseX > menuObject.details[1] - 50 && mouseX < menuObject.details[1] + 50 && mouseY > menuObject.details[2] - 10 && mouseY < menuObject.details[2] + 10) {
+			console.log("clicked");
+		} 
 	}
 }
 
