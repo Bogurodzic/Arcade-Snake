@@ -42,16 +42,18 @@ function draw() {
 			score.points += 1;
 			location();
 		}
+
 		score.handleScoreDisplaying();
 
-		fill(121, 185, 71);
-		rect(food.x, food.y, multiplier, multiplier);
+		spawnFood();
 	} 
 
 	if(menu.menuVisible){
 		menu.handleShowMenu();
 	}
 }
+
+
 
 function keyPressed() {
 	if (snake.size === 0) {
@@ -316,3 +318,7 @@ function turnOnGame(){
 	start = true;
 }
 
+function spawnFood(){
+	fill(121, 185, 71);
+	rect(food.x, food.y, multiplier, multiplier);
+}
