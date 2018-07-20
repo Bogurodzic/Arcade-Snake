@@ -36,7 +36,7 @@ function draw() {
 	if(start === true){
 		snake.update();
 		snake.show();
-		snake.death();
+		snake.checkIfDead();
 
 		if (snake.eat(food) === true){
 			score.points += 1;
@@ -164,13 +164,18 @@ class Snake {
 
 	}
 
-	death(){
+	checkIfDead(){
 		for (var i=0; i<this.tail.length-1; i++){
 			var distance = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
 			if(distance < 1){
-				this.reset();
+				this.death();
 			}
 		} 
+	}
+
+	death(){
+		turnOffGame();
+		menu.turnOnMenuVisibility();
 	}
 
 	reset(){
@@ -221,7 +226,7 @@ class Menu {
 	} 
 
 	handleShowMenu() {
-		pauseGame();
+		turnOffGame();
 		this.showAllText();
 		this.listenToMouseEvents();
 	}
@@ -291,16 +296,17 @@ class Menu {
 
 	startGame(){
 		this.turnOffMenuVisibility();
-		startGame();
+		snake.reset();
+		turnOnGame();
 	}
 }
 
 
-function pauseGame(){
+function turnOffGame(){
 	start = false;
 }
 
-function startGame(){
+function turnOnGame(){
 	start = true;
 }
 
