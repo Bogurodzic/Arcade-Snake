@@ -199,16 +199,20 @@ class Snake {
 class Menu {
 	constructor(){
 		this.menuVisible = false;
+		this.colors = {
+			normal: {fristValue: 255, secondValue: 255, thirdValue: 255},
+			highlited: {fristValue: 153, secondValue: 255, thirdValue: 51}
+		}
 		this.menuObjects = [
-			[
-				"Menu", 300, 220, 15, 15
-			],
-			[
-				"Play", 300, 250, 15, 15
-			],
-			[
-				"Options", 300, 270, 15, 15
-			]
+			{
+				details: ["Menu", 300, 220, 15, 15], color: this.colors.normal, font: 16, align: CENTER 
+			},
+			{
+				details: ["Play", 300, 250, 15, 15], color: this.colors.normal, font: 14, align: CENTER
+			},
+			{
+				details: ["Options", 300, 270, 15, 15], color: this.colors.normal, font: 14, align: CENTER
+			}
 		]
 	} 
 
@@ -233,15 +237,15 @@ class Menu {
 	}
 
 	showMenuTitle() {
-		this.showText(this.menuObjects[0], {fristValue: 255, secondValue: 255, thirdValue: 255}, 16, CENTER)
+		this.showText(this.menuObjects[0].details, this.menuObjects[0].color, this.menuObjects[0].font, this.menuObjects[0].align)
 	}
 
 	showPlay() {
-		this.showText(this.menuObjects[1], {fristValue: 153, secondValue: 255, thirdValue: 51}, 14, CENTER)
+		this.showText(this.menuObjects[1].details, this.menuObjects[1].color, this.menuObjects[1].font, this.menuObjects[1].align)
 	}
 
 	showOptions() {
-		this.showText(this.menuObjects[2], {fristValue: 153, secondValue: 255, thirdValue: 51}, 14, CENTER)
+		this.showText(this.menuObjects[2].details, this.menuObjects[2].color, this.menuObjects[2].font, this.menuObjects[2].align)
 	}
 
 	showText(textDetails, color, size, align) {
@@ -252,14 +256,21 @@ class Menu {
 	}
 
 	listenToMouseEvents(){
-		if(mouseX > 300 - 50 && mouseX < 300 + 50 && mouseY > 220 - 10 && mouseY < 220 + 10) {
-			console.log("XD");
+		this.highliteEvents();
+	}
 
+	highliteEvents(){
+		for(var i = 1; i < this.menuObjects.length; i++){
+			this.checkIfHiglited(this.menuObjects[i]);
 		}
 	}
 
-	highlite(){
-
+	checkIfHiglited(menuObject) {
+		if(mouseX > menuObject.details[1] - 50 && mouseX < menuObject.details[1] + 50 && mouseY > menuObject.details[2] - 10 && mouseY < menuObject.details[2] + 10) {
+			menuObject.color = this.colors.highlited;
+		} else {
+			menuObject.color = this.colors.normal;
+		}
 	}
 }
 
