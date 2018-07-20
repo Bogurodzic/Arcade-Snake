@@ -22,6 +22,7 @@ Classic arcade game project
 
 ## Assets
 * sound - Picked Coin [[link]](https://opengameart.org/content/picked-coin-echo-2)
+* music - Game Over [[link]](https://opengameart.org/content/game-over-0)
 
 ## Setup
 * Open live version: [[link]](http://www.kamiljarzab.pl/Projekty/Snake/)

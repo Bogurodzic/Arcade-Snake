@@ -14,6 +14,7 @@ function preload() {
 	scoreFont = loadFont('assets/fonts/score.ttf');
 	
 	coin = loadSound('assets/music/coin.wav');
+	gameover = loadSound('assets/music/over.wav');
 }
 
 function setup() {
@@ -190,6 +191,7 @@ class Snake {
 
 	death(){
 		turnOffGame();
+		gameover.play();
 		menu.turnOnMenuVisibility();
 	}
 
