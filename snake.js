@@ -1,4 +1,4 @@
-var start = true;
+var start = false;
 
 var snake;
 var food;
@@ -18,6 +18,7 @@ function setup() {
 	score = new Score();
 	menu = new Menu();
 	location();
+	menu.turnOnMenuVisibility();
 }
 
 function location() {
@@ -44,12 +45,13 @@ function draw() {
 		score.displayString();
 		score.displayScore();
 		score.checkPoints();
-		menu.showMenuTitle();
 
 		fill(121, 185, 71);
 		rect(food.x, food.y, multiplier, multiplier);
-	} else {
-		//startGame();
+	} 
+
+	if(menu.menuVisible){
+		menu.handleShowMenu();
 	}
 }
 
@@ -212,23 +214,52 @@ class Menu {
 
 	handleShowMenu() {
 		pauseGame();
-		this.showMenu();
+		this.showAllText();
+		this.listenToMouseEvents();
 	}
 
-	hideMenu() {
-		menuVisible = false;
+	showAllText(){
+		this.showMenuTitle();
+		this.showPlay();
+		this.showOptions();
+	}
+
+	turnOffMenuVisibility() {
+		this.menuVisible = false;
 	}
 	
-	showMenu() {
-		menuVisible = true;
+	turnOnMenuVisibility() {
+		this.menuVisible = true;
 	}
 
 	showMenuTitle() {
-		textAlign(CENTER);
-		textSize(16);
-		text(...this.menuObjects[0]);
-		text(...this.menuObjects[1]);
-		text(...this.menuObjects[2]);
+		this.showText(this.menuObjects[0], {fristValue: 255, secondValue: 255, thirdValue: 255}, 16, CENTER)
+	}
+
+	showPlay() {
+		this.showText(this.menuObjects[1], {fristValue: 153, secondValue: 255, thirdValue: 51}, 14, CENTER)
+	}
+
+	showOptions() {
+		this.showText(this.menuObjects[2], {fristValue: 153, secondValue: 255, thirdValue: 51}, 14, CENTER)
+	}
+
+	showText(textDetails, color, size, align) {
+		fill(color.fristValue, color.secondValue, color.thirdValue);
+		textSize(size);
+		textAlign(align);
+		text(...textDetails);
+	}
+
+	listenToMouseEvents(){
+		if(mouseX > 300 - 50 && mouseX < 300 + 50 && mouseY > 220 - 10 && mouseY < 220 + 10) {
+			console.log("XD");
+
+		}
+	}
+
+	highlite(){
+
 	}
 }
 
