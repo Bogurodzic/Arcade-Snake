@@ -212,7 +212,7 @@ class Menu {
 				details: ["Menu", 300, 220, 15, 15], color: this.colors.normal, font: 16, align: CENTER 
 			},
 			{
-				details: ["Play", 300, 250, 15, 15], color: this.colors.normal, font: 14, align: CENTER
+				details: ["Play", 300, 250, 15, 15], color: this.colors.normal, font: 14, align: CENTER, onClicked: () => this.startGame()
 			},
 			{
 				details: ["Options", 300, 270, 15, 15], color: this.colors.normal, font: 14, align: CENTER
@@ -285,8 +285,13 @@ class Menu {
 
 	checkIfClicked(menuObject) {
 		if(mouseX > menuObject.details[1] - 50 && mouseX < menuObject.details[1] + 50 && mouseY > menuObject.details[2] - 10 && mouseY < menuObject.details[2] + 10) {
-			console.log("clicked");
+			menuObject.onClicked();
 		} 
+	}
+
+	startGame(){
+		this.turnOffMenuVisibility();
+		startGame();
 	}
 }
 
