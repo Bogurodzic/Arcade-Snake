@@ -96,39 +96,44 @@ function keyPressed() {
 
 }
 
-function Score(){
-	this.points = 0;
-	this.highestPoints = 0;
+class Score {
+	constructor(){
+		this.points = 0;
+		this.highestPoints = 0;
+	}
 
-	this.displayString = function(){
+	displayString(){
 		textSize(10);
 		text("Score: ", 550, 0, 15, 15);
 		text("Best-Score: ", 0, 0, 15, 15);
 	}
 
-	this.displayScore = function(){
+	displayScore(){
 		textSize(10);
 		text(this.points , 585, 0, 15, 15);
 		text(this.highestPoints, 55, 0, 15, 15);
 	}
 
-	this.checkPoints = function(){
+	checkPoints(){
 		if (this.points > this.highestPoints){
 			this.highestPoints = this.points;
 		}
 	}
 }
 
-function Snake() {
-	this.x = 0;
-	this.y = 0;
-	this.xspeed = 1;
-	this.yspeed = 0;
+class Snake {
+	constructor(){
+		this.x = 0;
+		this.y = 0;
+		this.xspeed = 1;
+		this.yspeed = 0;
+	
+		this.size = 0;
+		this.tail = [];
+	}
 
-	this.size = 0;
-	this.tail = [];
 
-	this.update = function(){
+	update(){
 		if (this.tail.length === this.size){
 			for (var i=0; i<this.tail.length-1; i++){
 				this.tail[i] = this.tail[i+1];				
@@ -145,7 +150,7 @@ function Snake() {
 
 	}
 
-	this.show = function(){
+	show(){
 		fill(snakeColor);
 		for (var i=0; i < this.tail.length; i++){
 			rect(this.tail[i].x, this.tail[i].y, multiplier, multiplier);
@@ -154,7 +159,7 @@ function Snake() {
 
 	}
 
-	this.death = function(){
+	death(){
 		for (var i=0; i<this.tail.length-1; i++){
 			var distance = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
 			if(distance < 1){
@@ -163,7 +168,7 @@ function Snake() {
 		} 
 	}
 
-	this.reset = function(){
+	reset(){
 		this.size = 0;
 		this.tail = [];
 		this.x=0;
@@ -173,12 +178,12 @@ function Snake() {
 		redraw();
 	}
 
-	this.direction = function(x, y) {
+	direction(x, y) {
 		this.xspeed = x;
 		this.yspeed = y;
 	}
 
-	this.eat = function(cords){
+	eat(cords){
 		var distance = dist(this.x, this.y, cords.x, cords.y);
 
 		if (distance<1) {
