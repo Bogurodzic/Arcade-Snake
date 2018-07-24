@@ -225,6 +225,7 @@ class Snake {
 class Menu {
 	constructor(){
 		this.menuVisible = false;
+		this.optionVisible = false;
 		this.colors = {
 			normal: {fristValue: 255, secondValue: 255, thirdValue: 255},
 			highlited: {fristValue: 153, secondValue: 255, thirdValue: 51}
@@ -237,41 +238,44 @@ class Menu {
 				details: ["Play", 300, 250, 15, 15], color: this.colors.normal, font: 14, align: CENTER, onClicked: () => this.startGame()
 			},
 			{
-				details: ["Options", 300, 270, 15, 15], color: this.colors.normal, font: 14, align: CENTER
+				details: ["Options", 300, 270, 15, 15], color: this.colors.normal, font: 14, align: CENTER, onClicked: () => this.turnOnOptionMenuVisibility()
+			}
+		],
+		this.optionObjects = [
+			{
+				details: ["test", 300, 220, 15, 15], color: this.colors.normal, font: 16, align: CENTER 
+			},
+			{
+				details: ["test", 300, 250, 15, 15], color: this.colors.normal, font: 14, align: CENTER, onClicked: () => this.startGame()
+			},
+			{
+				details: ["test", 300, 270, 15, 15], color: this.colors.normal, font: 14, align: CENTER
 			}
 		]
 	} 
 
 	handleShowMenu() {
 		turnOffGame();
+		this.checkWhichPartOfMenuIsVisible();
+	}
+
+	checkWhichPartOfMenuIsVisible() {
+		if(!this.optionVisible){
+			this.showInitialMenu();
+		} else {
+			this.showOptionMenu();
+		}
+	}
+
+	showInitialMenu(){
 		this.showAllText();
 		this.listenToMouseEvents();
 	}
 
 	showAllText(){
-		this.showMenuTitle();
-		this.showPlay();
-		this.showOptions();
-	}
-
-	turnOffMenuVisibility() {
-		this.menuVisible = false;
-	}
-	
-	turnOnMenuVisibility() {
-		this.menuVisible = true;
-	}
-
-	showMenuTitle() {
-		this.showText(this.menuObjects[0].details, this.menuObjects[0].color, this.menuObjects[0].font, this.menuObjects[0].align)
-	}
-
-	showPlay() {
-		this.showText(this.menuObjects[1].details, this.menuObjects[1].color, this.menuObjects[1].font, this.menuObjects[1].align)
-	}
-
-	showOptions() {
-		this.showText(this.menuObjects[2].details, this.menuObjects[2].color, this.menuObjects[2].font, this.menuObjects[2].align)
+		this.menuObjects.forEach(element => {
+			this.showText(element.details, element.color, element.font, element.align);
+		});
 	}
 
 	showText(textDetails, color, size, align) {
@@ -312,10 +316,26 @@ class Menu {
 		} 
 	}
 
-	startGame(){
+	showOptionMenu() {
+		console.log('xDD');
+	}
+
+	turnOnOptionMenuVisibility() {
+		this.optionVisible = true;
+	}
+
+	startGame() {
 		this.turnOffMenuVisibility();
 		snake.reset();
 		turnOnGame();
+	}
+
+	turnOffMenuVisibility() {
+		this.menuVisible = false;
+	}
+	
+	turnOnMenuVisibility() {
+		this.menuVisible = true;
 	}
 }
 
