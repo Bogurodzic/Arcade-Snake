@@ -12,7 +12,7 @@ var snakeColor = 255;
 function preload() {
 	arcadeFont = loadFont('assets/fonts/black.ttf');
 	scoreFont = loadFont('assets/fonts/score.ttf');
-
+	
 	coin = loadSound('assets/music/coin.wav');
 	gameover = loadSound('assets/music/over.wav');
 }
@@ -32,7 +32,7 @@ function location() {
 	var rows = floor(height/multiplier);
 	food = createVector(floor(random(columns)), floor(random(rows)));
 	food.mult(multiplier);
-
+	
 }
 
 
@@ -53,7 +53,7 @@ function draw() {
 		score.handleScoreDisplaying();
 
 		spawnFood();
-	}
+	} 
 
 	if(menu.menuVisible){
 		menu.handleShowMenu();
@@ -66,20 +66,20 @@ function keyPressed() {
 	if (snake.size === 0) {
 
 		if (keyCode === UP_ARROW) {
-			snake.direction(0, -1);
+			snake.direction(0, -1);			
 		} 	else if (keyCode === DOWN_ARROW) {
 				snake.direction(0, 1)
 		}	else if (keyCode === LEFT_ARROW) {
 				snake.direction(-1, 0)
 		}	else if (keyCode === RIGHT_ARROW) {
 				snake.direction(1, 0)
-		}
+		}		
 	} else {
 		if (keyCode === UP_ARROW) {
 			if (snake.yspeed !== 1) {
-				snake.direction(0, -1);
+				snake.direction(0, -1);	
 			} else {
-				return;
+				return;	
 			}
 		} 	else if (keyCode === DOWN_ARROW) {
 				if (snake.yspeed !== -1){
@@ -89,7 +89,7 @@ function keyPressed() {
 			}
 		}	else if (keyCode === LEFT_ARROW) {
 				if(snake.xspeed !== 1){
-					snake.direction(-1, 0)
+					snake.direction(-1, 0)					
 				} else {
 					return;
 				}
@@ -99,7 +99,7 @@ function keyPressed() {
 				} else {
 					return;
 				}
-		}
+		}		
 	}
 
 }
@@ -148,7 +148,7 @@ class Snake {
 		this.y = 300;
 		this.xspeed = 1;
 		this.yspeed = 0;
-
+	
 		this.size = 0;
 		this.tail = [];
 	}
@@ -157,8 +157,8 @@ class Snake {
 	update(){
 		if (this.tail.length === this.size){
 			for (var i=0; i<this.tail.length-1; i++){
-				this.tail[i] = this.tail[i+1];
-			}
+				this.tail[i] = this.tail[i+1];				
+			}			
 		}
 
 		this.tail[this.size-1] = createVector(this.x, this.y);
@@ -186,7 +186,7 @@ class Snake {
 			if(distance < 1){
 				this.death();
 			}
-		}
+		} 
 	}
 
 	death(){
@@ -201,7 +201,7 @@ class Snake {
 		this.x=0;
 		this.y=300;
 		score.points = 0;
-		location();
+		location();	
 		redraw();
 	}
 
@@ -231,7 +231,7 @@ class Menu {
 		}
 		this.menuObjects = [
 			{
-				details: ["Menu", 300, 220, 15, 15], color: this.colors.normal, font: 16, align: CENTER
+				details: ["Menu", 300, 220, 15, 15], color: this.colors.normal, font: 16, align: CENTER 
 			},
 			{
 				details: ["Play", 300, 250, 15, 15], color: this.colors.normal, font: 14, align: CENTER, onClicked: () => this.startGame()
@@ -240,7 +240,7 @@ class Menu {
 				details: ["Options", 300, 270, 15, 15], color: this.colors.normal, font: 14, align: CENTER
 			}
 		]
-	}
+	} 
 
 	handleShowMenu() {
 		turnOffGame();
@@ -257,7 +257,7 @@ class Menu {
 	turnOffMenuVisibility() {
 		this.menuVisible = false;
 	}
-
+	
 	turnOnMenuVisibility() {
 		this.menuVisible = true;
 	}
@@ -309,7 +309,7 @@ class Menu {
 	checkIfClicked(menuObject) {
 		if(mouseX > menuObject.details[1] - 50 && mouseX < menuObject.details[1] + 50 && mouseY > menuObject.details[2] - 10 && mouseY < menuObject.details[2] + 10) {
 			menuObject.onClicked();
-		}
+		} 
 	}
 
 	startGame(){
